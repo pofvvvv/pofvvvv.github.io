@@ -203,7 +203,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-12 18:01:35" itemprop="dateModified" datetime="2024-04-12T18:01:35+08:00">2024-04-12</time>
+                <time title="修改时间：2024-04-12 18:06:01" itemprop="dateModified" datetime="2024-04-12T18:06:01+08:00">2024-04-12</time>
               </span>
 
           
@@ -217,15 +217,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>​        <strong>真是顶不得了</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/04/09/%E4%B8%8D%E8%87%AA%E5%BE%8B%E7%9A%84%E4%B8%80%E5%A4%A9/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <span id="more"></span>
+
+<p>​        a星期二，是我一周中课最少的一天，昨天还想着能用今天把物理作业给做了，再学学高数，还可以弄下博客。但是事与愿违，中午回到宿舍之后没睡午觉，而是躺在床上刷了一小时左右抖音，深刻认识到了现在计算机行业的就业形势之严峻，于是痛定思痛，希望自己能痛改前非，重新做人。也是马上就放下了手机，试图进入梦乡。但是再次事与愿违，周公鸟都不想鸟我。</p>
+<p>​        起床之后我开始做一道关于树的题目，题干大概意思找出具有a+b+c个节点且高度最小的二叉树，满足a个节点具有两个子节点，b个节点具有一个子节点，c个节点没有子节点。若不存在这样的树，输出-1，否侧输出树的高度。</p>
+<p>​        我这个铸币被这题卡了得有一个小时，主要是公式写错了🤣，然后样例又都过了，然后就变成了不明白自己错在哪的情况。当时做这题首先是在书上看到了一个定理：一棵非空二叉树空子树的数目等于其节点加一。此定理的证明为：对于一个有n个节点的树，会有2n个子树，而除了根节点外，每个节点都有其父节点，也就是说存在n-1个父节点，即n-1棵非空子树，那么空子树的数目显然为n+1。更直观地来看，从根节点开始，对于根节点来说，一开始有两个空子树，若继续插入节点，则会占用一个位置，一个空子树会变为非空子树，而新的节点又会有两个空子树，以此类推，可知空子树的数目为节点数加一。</p>
+<p>​         基于这个定理，我们可以列出方程：a+b+c+1&#x3D;2*c+b，即c&#x3D;a+1。这个东西可以用来判断树是否存在，若给出的数据不满足c&#x3D;a+1，就直接输出-1即可。怎么求树的最小高度呢，我第一时间想到的是要先保证构造出的树是最小的。然后凭感觉来看当具有两个子节点的节点尽量靠近根节点的时候应该才会有最小高度。那么由a个具有两个子节点的节点构成的树的高度应为log2(a)向下取整,再考虑把b个具有一个子节点的节点加上来之后的情况，此时要考虑最低层是否已被填满，若未满，应先用具有一个子节点的节点填满。第i层应有的对于目前全部由具有两个子节点的节点构成的树，第i层应有2的i次方个节点。此时的最底层为第log2(a)向上取整层，空的节点数就应为2的log2(a)向上取整加一次方乘2再减1再减去a。填满这一部分后，就可以构建下一层了。然后略加思索之后发现构建新的一层所需的节点数恒为c，事情就变得简单起来了，b减去前面填空用节点数之后除以c再向上取整再加上前面的高度，最后加上c的一层，就得答案了。</p>
+<p>#include <iostream><br>#include <cmath><br>using namespace std;<br>int main(){<br>    int t,depth;<br>    double a,b,c;<br>    cin&gt;&gt;t;<br>    for(int i&#x3D;0;i&lt;t;i++){<br>        cin&gt;&gt;a&gt;&gt;b&gt;&gt;c;<br>        if(a+1!&#x3D;c){<br>            cout&lt;&lt;-1&lt;&lt;”\n”;<br>            continue;<br>        }<br>        else if(a&#x3D;&#x3D;0)<br>            depth&#x3D;b+c-1;<br>        else if(b&#x3D;&#x3D;0&amp;&amp;a&gt;1){<br>            depth&#x3D;floor(log2(a))+1;<br>        }<br>        else if(b&#x3D;&#x3D;0&amp;&amp;a&#x3D;&#x3D;0){<br>            depth&#x3D;0;<br>        }<br>        else if((b&lt;&#x3D;ceil((b-2<em>pow(2,floor(log2(a)))+1+a)&#x2F;c))&amp;&amp;b&gt;0){<br>            depth&#x3D;ceil(log2(a))+1;<br>        }<br>        else{<br>            depth&#x3D;floor(log2(a))+1+ceil((b-2</em>pow(2,floor(log2(a)))+1+a)&#x2F;c);<br>        }<br>        cout&lt;&lt;depth&lt;&lt;”\n”;<br>    }<br>} </p>
+
       
     </div>
 
@@ -275,7 +274,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-12 18:00:37" itemprop="dateModified" datetime="2024-04-12T18:00:37+08:00">2024-04-12</time>
+                <time title="修改时间：2024-04-12 18:05:46" itemprop="dateModified" datetime="2024-04-12T18:05:46+08:00">2024-04-12</time>
               </span>
 
           
@@ -289,15 +288,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>man!</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/04/08/my-first-blog/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <span id="more"></span>
+
+<p>man！</p>
+<p>what can i say?</p>
+
       
     </div>
 
