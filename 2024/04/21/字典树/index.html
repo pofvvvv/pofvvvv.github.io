@@ -20,30 +20,32 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="栽一棵树最好的时机是十年前，其次是现在">
-<meta property="og:type" content="website">
-<meta property="og:title" content="也无风雨也无晴">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="【问题描述】   编写程序统计一个英文文本文件中每个单词的出现次数（词频统计），并将统计结果按单词出现频率由高至低输出到指定文件中。   本题采用的数据结构为trie树，也称为字典树，具体请参考相关资料。   注：在此单词为仅由字母组成的字符序列。包含大写字母的单词应将大写字母转换为小写字母后统计。此外，由于输入文件是英文小说，因此不会出现无意义的单词。 【输入形式】   打开当前目录下文件in.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="词频统计">
+<meta property="og:url" content="http://example.com/2024/04/21/%E5%AD%97%E5%85%B8%E6%A0%91/index.html">
 <meta property="og:site_name" content="也无风雨也无晴">
-<meta property="og:description" content="栽一棵树最好的时机是十年前，其次是现在">
+<meta property="og:description" content="【问题描述】   编写程序统计一个英文文本文件中每个单词的出现次数（词频统计），并将统计结果按单词出现频率由高至低输出到指定文件中。   本题采用的数据结构为trie树，也称为字典树，具体请参考相关资料。   注：在此单词为仅由字母组成的字符序列。包含大写字母的单词应将大写字母转换为小写字母后统计。此外，由于输入文件是英文小说，因此不会出现无意义的单词。 【输入形式】   打开当前目录下文件in.">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-21T15:04:00.822Z">
+<meta property="article:modified_time" content="2024-04-21T15:14:49.580Z">
 <meta property="article:author" content="pofvvvv">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2024/04/21/%E5%AD%97%E5%85%B8%E6%A0%91/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>也无风雨也无晴</title>
+  <title>词频统计 | 也无风雨也无晴</title>
   
 
 
@@ -166,9 +168,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -184,10 +187,9 @@
       <meta itemprop="name" content="也无风雨也无晴">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/04/21/%E5%AD%97%E5%85%B8%E6%A0%91/" class="post-title-link" itemprop="url">词频统计</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          词频统计
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -211,7 +213,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>【问题描述】</p>
+        <p>【问题描述】</p>
 <p>  编写程序统计一个英文文本文件中每个单词的出现次数（词频统计），并将统计结果按单词出现频率由高至低输出到指定文件中。</p>
 <p>  本题采用的数据结构为trie树，也称为字典树，具体请参考相关资料。</p>
 <p>  注：在此单词为仅由字母组成的字符序列。包含大写字母的单词应将大写字母转换为小写字母后统计。此外，由于输入文件是英文小说，因此不会出现无意义的单词。</p>
@@ -223,219 +225,30 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> n 10000</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dtree</span>&#123;  <span class="comment">//字典树ADT </span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">	<span class="type">int</span> trie[n][<span class="number">26</span>];</span><br><span class="line">    <span class="type">int</span> cont[n]=&#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="type">int</span> id=<span class="number">0</span>,sum=<span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(string s)</span></span>&#123; <span class="comment">//插入函数 </span></span><br><span class="line">	<span class="type">int</span> p=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="built_in">int</span>(s.<span class="built_in">size</span>());i++)&#123;</span><br><span class="line">		<span class="type">int</span> x=s[i]-<span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">		<span class="keyword">if</span>(trie[p][x]==<span class="number">0</span>)trie[p][x]=++id;</span><br><span class="line">		p=trie[p][x];</span><br><span class="line">	&#125;</span><br><span class="line">	cont[p]++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findcnt</span><span class="params">(string s)</span></span>&#123; <span class="comment">//查找函数被 </span></span><br><span class="line">	<span class="type">int</span> p=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="built_in">int</span>(s.<span class="built_in">size</span>());i++)&#123;</span><br><span class="line">		<span class="type">int</span> x=s[i]-<span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">		<span class="keyword">if</span>(trie[p][x]==<span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		p=trie[p][x];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> cont[p];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line">unordered_map&lt;string,<span class="type">int</span>&gt;tip;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isEnglishChar</span><span class="params">(<span class="type">char</span> c)</span> </span>&#123;  </span><br><span class="line">    <span class="comment">// ASCII码中，英文字符（包括大小写字母）的范围是65-90和97-122  </span></span><br><span class="line">    <span class="keyword">return</span> (c &gt;= <span class="string">&#x27;A&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;Z&#x27;</span>) || (c &gt;= <span class="string">&#x27;a&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;z&#x27;</span>);  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">comp</span><span class="params">(<span class="type">const</span> std::pair&lt;std::string, <span class="type">int</span>&gt;&amp; a, <span class="type">const</span> std::pair&lt;std::string, <span class="type">int</span>&gt;&amp; b)</span> </span>&#123;  </span><br><span class="line">    <span class="comment">// 先比较int值  </span></span><br><span class="line">    <span class="keyword">if</span> (a.second != b.second) &#123;  </span><br><span class="line">        <span class="keyword">return</span> a.second &gt; b.second; <span class="comment">// 注意这里的符号，根据你的需求可能是 &gt; 或 &lt;  </span></span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">// 如果int值相等，则比较字符串的字典序  </span></span><br><span class="line">    <span class="keyword">return</span> a.first &lt; b.first; <span class="comment">// 如果你想按照升序输出字符串，使用 &lt;  </span></span><br><span class="line">    <span class="comment">// 如果你想按照降序输出字符串，使用 &gt;  </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="function">std::ifstream <span class="title">file</span><span class="params">(<span class="string">&quot;in.txt&quot;</span>)</span></span>; <span class="comment">// 打开文件  </span></span><br><span class="line">    <span class="keyword">if</span> (!file.<span class="built_in">is_open</span>()) &#123;  </span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;无法打开文件!&quot;</span> &lt;&lt; std::endl;  </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;  </span><br><span class="line">    &#125;</span><br><span class="line">    Dtree dt;</span><br><span class="line">	string str;</span><br><span class="line">	<span class="built_in">memset</span>(dt.trie,<span class="number">0</span>,<span class="built_in">sizeof</span>(dt.trie));</span><br><span class="line">	<span class="keyword">while</span>(file&gt;&gt;str)&#123;</span><br><span class="line">		string pstr=<span class="string">&quot;&quot;</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="built_in">int</span>(str.<span class="built_in">size</span>());i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">isEnglishChar</span>(str[i]))&#123;</span><br><span class="line">				pstr+=<span class="built_in">tolower</span>(str[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="keyword">if</span>(!pstr.<span class="built_in">empty</span>())&#123;</span><br><span class="line">					dt.<span class="built_in">insert</span>(pstr);</span><br><span class="line">		        	tip[pstr]=<span class="number">1</span>;</span><br><span class="line">		        	pstr=<span class="string">&quot;&quot;</span>;</span><br><span class="line">				&#125;</span><br><span class="line">            <span class="keyword">continue</span>;    </span><br><span class="line">            &#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(!pstr.<span class="built_in">empty</span>())&#123;</span><br><span class="line">			dt.<span class="built_in">insert</span>(pstr);</span><br><span class="line">			tip[pstr]=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	file.<span class="built_in">close</span>();</span><br><span class="line">	vector&lt;pair&lt;string, <span class="type">int</span>&gt;&gt;ve;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">const</span> <span class="keyword">auto</span>&amp; pair : tip)&#123;</span><br><span class="line">			ve.<span class="built_in">push_back</span>(<span class="built_in">make_pair</span>(pair.first,dt.<span class="built_in">findcnt</span>(pair.first)));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">sort</span>(ve.<span class="built_in">begin</span>(),ve.<span class="built_in">end</span>(),comp);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">const</span> <span class="keyword">auto</span>&amp; pair : ve)&#123;</span><br><span class="line">		<span class="keyword">if</span>(dt.sum==<span class="number">100</span>)<span class="keyword">break</span>;</span><br><span class="line">		cout&lt;&lt;pair.first&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;dt.<span class="built_in">findcnt</span>(pair.first)&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">		dt.sum++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/09/%E4%B8%8D%E8%87%AA%E5%BE%8B%E7%9A%84%E4%B8%80%E5%A4%A9/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://q.qlogo.cn/headimg_dl?dst_uin=2311685537&spec=640&img_type=jpg">
-      <meta itemprop="name" content="pofvvvv">
-      <meta itemprop="description" content="栽一棵树最好的时机是十年前，其次是现在">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="也无风雨也无晴">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/04/09/%E4%B8%8D%E8%87%AA%E5%BE%8B%E7%9A%84%E4%B8%80%E5%A4%A9/" class="post-title-link" itemprop="url">不自律的一天</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-04-09 23:11:16" itemprop="dateCreated datePublished" datetime="2024-04-09T23:11:16+08:00">2024-04-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-12 18:06:01" itemprop="dateModified" datetime="2024-04-12T18:06:01+08:00">2024-04-12</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<p>​        a星期二，是我一周中课最少的一天，昨天还想着能用今天把物理作业给做了，再学学高数，还可以弄下博客。但是事与愿违，中午回到宿舍之后没睡午觉，而是躺在床上刷了一小时左右抖音，深刻认识到了现在计算机行业的就业形势之严峻，于是痛定思痛，希望自己能痛改前非，重新做人。也是马上就放下了手机，试图进入梦乡。但是再次事与愿违，周公鸟都不想鸟我。</p>
-<p>​        起床之后我开始做一道关于树的题目，题干大概意思找出具有a+b+c个节点且高度最小的二叉树，满足a个节点具有两个子节点，b个节点具有一个子节点，c个节点没有子节点。若不存在这样的树，输出-1，否侧输出树的高度。</p>
-<p>​        我这个铸币被这题卡了得有一个小时，主要是公式写错了🤣，然后样例又都过了，然后就变成了不明白自己错在哪的情况。当时做这题首先是在书上看到了一个定理：一棵非空二叉树空子树的数目等于其节点加一。此定理的证明为：对于一个有n个节点的树，会有2n个子树，而除了根节点外，每个节点都有其父节点，也就是说存在n-1个父节点，即n-1棵非空子树，那么空子树的数目显然为n+1。更直观地来看，从根节点开始，对于根节点来说，一开始有两个空子树，若继续插入节点，则会占用一个位置，一个空子树会变为非空子树，而新的节点又会有两个空子树，以此类推，可知空子树的数目为节点数加一。</p>
-<p>​         基于这个定理，我们可以列出方程：a+b+c+1&#x3D;2*c+b，即c&#x3D;a+1。这个东西可以用来判断树是否存在，若给出的数据不满足c&#x3D;a+1，就直接输出-1即可。怎么求树的最小高度呢，我第一时间想到的是要先保证构造出的树是最小的。然后凭感觉来看当具有两个子节点的节点尽量靠近根节点的时候应该才会有最小高度。那么由a个具有两个子节点的节点构成的树的高度应为log2(a)向下取整,再考虑把b个具有一个子节点的节点加上来之后的情况，此时要考虑最低层是否已被填满，若未满，应先用具有一个子节点的节点填满。第i层应有的对于目前全部由具有两个子节点的节点构成的树，第i层应有2的i次方个节点。此时的最底层为第log2(a)向上取整层，空的节点数就应为2的log2(a)向上取整加一次方乘2再减1再减去a。填满这一部分后，就可以构建下一层了。然后略加思索之后发现构建新的一层所需的节点数恒为c，事情就变得简单起来了，b减去前面填空用节点数之后除以c再向上取整再加上前面的高度，最后加上c的一层，就得答案了。</p>
-<p>#include <iostream><br>#include <cmath><br>using namespace std;<br>int main(){<br>    int t,depth;<br>    double a,b,c;<br>    cin&gt;&gt;t;<br>    for(int i&#x3D;0;i&lt;t;i++){<br>        cin&gt;&gt;a&gt;&gt;b&gt;&gt;c;<br>        if(a+1!&#x3D;c){<br>            cout&lt;&lt;-1&lt;&lt;”\n”;<br>            continue;<br>        }<br>        else if(a&#x3D;&#x3D;0)<br>            depth&#x3D;b+c-1;<br>        else if(b&#x3D;&#x3D;0&amp;&amp;a&gt;1){<br>            depth&#x3D;floor(log2(a))+1;<br>        }<br>        else if(b&#x3D;&#x3D;0&amp;&amp;a&#x3D;&#x3D;0){<br>            depth&#x3D;0;<br>        }<br>        else if((b&lt;&#x3D;ceil((b-2<em>pow(2,floor(log2(a)))+1+a)&#x2F;c))&amp;&amp;b&gt;0){<br>            depth&#x3D;ceil(log2(a))+1;<br>        }<br>        else{<br>            depth&#x3D;floor(log2(a))+1+ceil((b-2</em>pow(2,floor(log2(a)))+1+a)&#x2F;c);<br>        }<br>        cout&lt;&lt;depth&lt;&lt;”\n”;<br>    }<br>} </p>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/04/09/%E4%B8%8D%E8%87%AA%E5%BE%8B%E7%9A%84%E4%B8%80%E5%A4%A9/" rel="prev" title="不自律的一天">
+      <i class="fa fa-chevron-left"></i> 不自律的一天
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/08/my-first-blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://q.qlogo.cn/headimg_dl?dst_uin=2311685537&spec=640&img_type=jpg">
-      <meta itemprop="name" content="pofvvvv">
-      <meta itemprop="description" content="栽一棵树最好的时机是十年前，其次是现在">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="也无风雨也无晴">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/04/08/my-first-blog/" class="post-title-link" itemprop="url">my first blog</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-04-08 22:45:41" itemprop="dateCreated datePublished" datetime="2024-04-08T22:45:41+08:00">2024-04-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-12 18:20:39" itemprop="dateModified" datetime="2024-04-12T18:20:39+08:00">2024-04-12</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<p>man！</p>
-<p>what can i say?</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/08/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://q.qlogo.cn/headimg_dl?dst_uin=2311685537&spec=640&img_type=jpg">
-      <meta itemprop="name" content="pofvvvv">
-      <meta itemprop="description" content="栽一棵树最好的时机是十年前，其次是现在">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="也无风雨也无晴">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/04/08/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-04-08 18:33:24 / 修改时间：23:31:46" itemprop="dateCreated datePublished" datetime="2024-04-08T18:33:24+08:00">2024-04-08</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>welcome!</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
