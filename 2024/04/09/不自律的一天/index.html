@@ -1,32 +1,163 @@
-extends includes/layout.pug
-
-block content
-  #post
-    if top_img === false
-      include includes/header/post-info.pug
-
-    article#article-container.post-content!=page.content
-    include includes/post/post-copyright.pug
-    .tag_share
-      if (theme.post_meta.post.tags)
-        .post-meta__tag-list
-          each item, index in page.tags.data
-            a(href=url_for(item.path)).post-meta__tags #[=item.name]
-      include includes/third-party/share/index.pug
-        
-    if theme.reward.enable && theme.reward.QR_code
-      !=partial('includes/post/reward', {}, {cache: true})
-
-    //- ad
-    if theme.ad && theme.ad.post
-      .ads-wrap!=theme.ad.post
-
-    if theme.post_pagination
-      include includes/pagination.pug
-    if theme.related_post && theme.related_post.enable
-      != related_posts(page,site.posts)
-
-    if page.comments !== false && theme.comments && theme.comments.use
-      - var commentsJsLoad = true
-      !=partial('includes/third-party/comments/index', {}, {cache: true})
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>不自律的一天 | 也无风雨也无晴</title><meta name="author" content="pofvvvv"><meta name="copyright" content="pofvvvv"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="​        a星期二，是我一周中课最少的一天，昨天还想着能用今天把物理作业给做了，再学学高数，还可以弄下博客。但是事与愿违，中午回到宿舍之后没睡午觉，而是躺在床上刷了一小时左右抖音，深刻认识到了现在计算机行业的就业形势之严峻，于是痛定思痛，希望自己能痛改前非，重新做人。也是马上就放下了手机，试图进入梦乡。但是再次事与愿违，周公鸟都不想鸟我。 ​        起床之后我开始做一道关于树的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="不自律的一天">
+<meta property="og:url" content="http://example.com/2024/04/09/%E4%B8%8D%E8%87%AA%E5%BE%8B%E7%9A%84%E4%B8%80%E5%A4%A9/index.html">
+<meta property="og:site_name" content="也无风雨也无晴">
+<meta property="og:description" content="​        a星期二，是我一周中课最少的一天，昨天还想着能用今天把物理作业给做了，再学学高数，还可以弄下博客。但是事与愿违，中午回到宿舍之后没睡午觉，而是躺在床上刷了一小时左右抖音，深刻认识到了现在计算机行业的就业形势之严峻，于是痛定思痛，希望自己能痛改前非，重新做人。也是马上就放下了手机，试图进入梦乡。但是再次事与愿违，周公鸟都不想鸟我。 ​        起床之后我开始做一道关于树的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2024-04-09T15:11:16.519Z">
+<meta property="article:modified_time" content="2024-04-21T15:18:35.000Z">
+<meta property="article:author" content="pofvvvv">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/04/09/%E4%B8%8D%E8%87%AA%E5%BE%8B%E7%9A%84%E4%B8%80%E5%A4%A9/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '不自律的一天',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-04-21 23:18:35'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
       
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="也无风雨也无晴"><span class="site-name">也无风雨也无晴</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">不自律的一天</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-04-09T15:11:16.519Z" title="发表于 2024-04-09 23:11:16">2024-04-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-04-21T15:18:35.000Z" title="更新于 2024-04-21 23:18:35">2024-04-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="不自律的一天"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><span id="more"></span>
+
+<p>​        a星期二，是我一周中课最少的一天，昨天还想着能用今天把物理作业给做了，再学学高数，还可以弄下博客。但是事与愿违，中午回到宿舍之后没睡午觉，而是躺在床上刷了一小时左右抖音，深刻认识到了现在计算机行业的就业形势之严峻，于是痛定思痛，希望自己能痛改前非，重新做人。也是马上就放下了手机，试图进入梦乡。但是再次事与愿违，周公鸟都不想鸟我。</p>
+<p>​        起床之后我开始做一道关于树的题目，题干大概意思找出具有a+b+c个节点且高度最小的二叉树，满足a个节点具有两个子节点，b个节点具有一个子节点，c个节点没有子节点。若不存在这样的树，输出-1，否侧输出树的高度。</p>
+<p>​        我这个铸币被这题卡了得有一个小时，主要是公式写错了🤣，然后样例又都过了，然后就变成了不明白自己错在哪的情况。当时做这题首先是在书上看到了一个定理：一棵非空二叉树空子树的数目等于其节点加一。此定理的证明为：对于一个有n个节点的树，会有2n个子树，而除了根节点外，每个节点都有其父节点，也就是说存在n-1个父节点，即n-1棵非空子树，那么空子树的数目显然为n+1。更直观地来看，从根节点开始，对于根节点来说，一开始有两个空子树，若继续插入节点，则会占用一个位置，一个空子树会变为非空子树，而新的节点又会有两个空子树，以此类推，可知空子树的数目为节点数加一。</p>
+<p>​         基于这个定理，我们可以列出方程：a+b+c+1&#x3D;2*c+b，即c&#x3D;a+1。这个东西可以用来判断树是否存在，若给出的数据不满足c&#x3D;a+1，就直接输出-1即可。怎么求树的最小高度呢，我第一时间想到的是要先保证构造出的树是最小的。然后凭感觉来看当具有两个子节点的节点尽量靠近根节点的时候应该才会有最小高度。那么由a个具有两个子节点的节点构成的树的高度应为log2(a)向下取整,再考虑把b个具有一个子节点的节点加上来之后的情况，此时要考虑最低层是否已被填满，若未满，应先用具有一个子节点的节点填满。第i层应有的对于目前全部由具有两个子节点的节点构成的树，第i层应有2的i次方个节点。此时的最底层为第log2(a)向上取整层，空的节点数就应为2的log2(a)向上取整加一次方乘2再减1再减去a。填满这一部分后，就可以构建下一层了。然后略加思索之后发现构建新的一层所需的节点数恒为c，事情就变得简单起来了，b减去前面填空用节点数之后除以c再向上取整再加上前面的高度，最后加上c的一层，就得答案了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> t,depth;</span><br><span class="line">	<span class="type">double</span> a,b,c;</span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;t;i++)&#123;</span><br><span class="line">		cin&gt;&gt;a&gt;&gt;b&gt;&gt;c;</span><br><span class="line">		<span class="keyword">if</span>(a+<span class="number">1</span>!=c)&#123;</span><br><span class="line">			cout&lt;&lt;<span class="number">-1</span>&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">0</span>)</span><br><span class="line">		    depth=b+c<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(b==<span class="number">0</span>&amp;&amp;a&gt;<span class="number">1</span>)&#123;</span><br><span class="line">			depth=<span class="built_in">floor</span>(<span class="built_in">log2</span>(a))+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(b==<span class="number">0</span>&amp;&amp;a==<span class="number">0</span>)&#123;</span><br><span class="line">			depth=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>((b&lt;=<span class="built_in">ceil</span>((b<span class="number">-2</span>*<span class="built_in">pow</span>(<span class="number">2</span>,<span class="built_in">floor</span>(<span class="built_in">log2</span>(a)))+<span class="number">1</span>+a)/c))&amp;&amp;b&gt;<span class="number">0</span>)&#123;</span><br><span class="line">			depth=<span class="built_in">ceil</span>(<span class="built_in">log2</span>(a))+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			depth=<span class="built_in">floor</span>(<span class="built_in">log2</span>(a))+<span class="number">1</span>+<span class="built_in">ceil</span>((b<span class="number">-2</span>*<span class="built_in">pow</span>(<span class="number">2</span>,<span class="built_in">floor</span>(<span class="built_in">log2</span>(a)))+<span class="number">1</span>+a)/c);</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;depth&lt;&lt;<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">pofvvvv</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/04/09/%E4%B8%8D%E8%87%AA%E5%BE%8B%E7%9A%84%E4%B8%80%E5%A4%A9/">http://example.com/2024/04/09/%E4%B8%8D%E8%87%AA%E5%BE%8B%E7%9A%84%E4%B8%80%E5%A4%A9/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">也无风雨也无晴</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/04/21/%E5%AD%97%E5%85%B8%E6%A0%91/" title="词频统计"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">词频统计</div></div></a></div><div class="next-post pull-right"><a href="/2024/04/08/my-first-blog/" title="my first blog"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">my first blog</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">pofvvvv</div><div class="author-info__description">栽一棵树最好的时机是十年前，其次是现在</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/21/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E8%BF%90%E5%8A%A8/" title="生命在于运动">生命在于运动</a><time datetime="2024-04-21T15:18:56.586Z" title="发表于 2024-04-21 23:18:56">2024-04-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/21/%E5%AD%97%E5%85%B8%E6%A0%91/" title="词频统计">词频统计</a><time datetime="2024-04-21T15:04:00.822Z" title="发表于 2024-04-21 23:04:00">2024-04-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/09/%E4%B8%8D%E8%87%AA%E5%BE%8B%E7%9A%84%E4%B8%80%E5%A4%A9/" title="不自律的一天">不自律的一天</a><time datetime="2024-04-09T15:11:16.519Z" title="发表于 2024-04-09 23:11:16">2024-04-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/08/my-first-blog/" title="my first blog">my first blog</a><time datetime="2024-04-08T14:45:41.209Z" title="发表于 2024-04-08 22:45:41">2024-04-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/08/hello-world/" title="Hello World">Hello World</a><time datetime="2024-04-08T10:33:24.422Z" title="发表于 2024-04-08 18:33:24">2024-04-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By pofvvvv</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
