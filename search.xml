@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>train</title>
+      <link href="/2024/05/10/train/"/>
+      <url>/2024/05/10/train/</url>
+      
+        <content type="html"><![CDATA[<p>n你知道的，用自己的笔记本弄ai大模型真的很折磨。之前部署ai到本地都好几次搞得我红温了，现在试图训练ai更是痛苦无比。部署ai时虽然报错一个接一个地出现，但在网上都还能看到相对应的解决方法，而现在我遇到的问题，就算挂上vpn，也只是在github上看到一个和我遇到相同问题的苦命人，而且，至今无人解答。具体的问题是在我安装deepspeed时，报错,import torch失败，叫我去安装pytorch。但是你知道的，我他妈绝对已经安装pytorch了，而且我自己在cmd中是可以import torch的。我也不知道到底是什么毛病，我也暂时没时间弄这个了，好多作业后天就要截止了啊啊啊啊啊。</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title></title>
       <link href="/2024/05/09/%E6%88%91%E7%9A%84%E6%95%85%E4%BA%8B/"/>
       <url>/2024/05/09/%E6%88%91%E7%9A%84%E6%95%85%E4%BA%8B/</url>
